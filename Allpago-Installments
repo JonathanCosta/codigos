@@ -171,15 +171,33 @@
                     </allpago_installments_onestepcheckout_billing>
                 </observers>
             </controller_action_predispatch_onestepcheckout_ajax_save_billing>
-
-
-            <controller_action_predispatch_checkout_cart_index>
+            <controller_action_postdispatch_onestepcheckout_ajax_set_methods_separate>
+                <observers>
+                    <allpago_installments_frontend_block>
+                        <type>singleton</type>
+                        <class>installments/observer</class>
+                        <method>installmentsPaymentBlock</method>
+                    </allpago_installments_frontend_block>                     
+                    <allpago_installments_onestepcheckout>
+                        <type>singleton</type>
+                        <class>installments/observer</class>
+                        <method>installmentsCheckout</method>
+                    </allpago_installments_onestepcheckout>
+                </observers>
+            </controller_action_postdispatch_onestepcheckout_ajax_set_methods_separate>
+            
+            <controller_action_postdispatch_checkout_cart_index>
                 <observers>
                     <allpago_installments_onestepcheckout_shipping>
                         <type>singleton</type>
                         <class>installments/observer</class>
                         <method>clearInfo</method>
                     </allpago_installments_onestepcheckout_shipping>
+                    <allpago_installments_checkout>
+                        <type>singleton</type>
+                        <class>installments/observer</class>
+                        <method>installmentsCheckout</method>
+                    </allpago_installments_checkout>                       
                 </observers>
             </controller_action_predispatch_checkout_cart_index> 
             <controller_action_postdispatch_onepagecheckout_index_index>
