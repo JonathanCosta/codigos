@@ -1,0 +1,4 @@
+$collection = Mage::getModel('customer/customer')->getCollection();
+    $collection->addFieldToFilter('entity_id',
+            array(array('from'=>'1','to'=>'3000')               
+    ));
