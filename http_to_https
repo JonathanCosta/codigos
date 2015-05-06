@@ -1,0 +1,28 @@
+# Acesso http redirecionado para https
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L]
+
+ou
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+ou
+
+RewriteEngine On 
+RewriteCond %{SERVER_PORT} 80 
+RewriteRule ^(.*)$ https://www.exemplo.com/$1 [R,L]
+
+----------------------------------
+php 
+<?
+function ForceHTTPS(){
+$new_url = "https://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+header("Location: $new_url");
+exit;
+}
+ 
+ 
+ForceHTTPS() //para chamar a função
+ 
+?>
