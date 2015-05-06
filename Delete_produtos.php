@@ -1,4 +1,5 @@
 <?php
+/*http://comunidademagento.com.br/portal/excluir-produtos-do-magento-via-codigo-com-filtro/*/
  require_once  'app/Mage.php';
 Varien_Profiler::enable();
 Mage::setIsDeveloperMode(true);
