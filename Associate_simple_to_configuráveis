@@ -1,0 +1,46 @@
+<?php
+require_once 'app/Mage.php';
+Varien_Profiler::enable();
+Mage::setIsDeveloperMode(true);
+ini_set('display_errors', 1);
+umask(0);
+$currentStore = Mage::app()->getStore()->getId();
+Mage::app()->setUpdateMode(0);
+Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+Mage::app()->getStore()->setId($currentStore);
+Mage::app()->setUpdateMode(1);
+Mage::register('isSecureArea', 1);
+set_time_limit(0);
+
+$configurableSku = 'crie-seu-nicho';//$line_of_text[1];
+        //$simpleProduct = Mage::getModel('catalog/product')->loadByAttribute('sku',$simpleSku);
+      $configurableProduct = Mage::getModel('catalog/product')->loadByAttribute('sku',$configurableSku);
+echo "Updating configurable product " . $configurableSku;
+        echo "<br>";
+$noninclud = array("6320","11420");
+$newids = array();
+$conf = Mage::getModel('catalog/product_type_configurable')->setProduct($configurableProduct);
+$col = $conf->getUsedProductCollection()->addAttributeToSelect('*')->addFilterByRequiredOptions();
+foreach($col as $simple_product){
+	
+    $noninclud[]=$simple_product->getId();
+	$newids[$simple_product->getId()] = 1;
+
+}
+
+$collection = Mage::getModel('catalog/product')->getCollection();
+$collection->addAttributeToFilter('name', array('like' =>'Crie seu nincho%'));
+$collection->addAttributeToFilter('entity_id', array('nin' =>$noninclud));
+
+$ids =$collection->getAllIds();
+
+//$newids = array();
+foreach ( $ids as $id ) {
+$newids[$id] = 2;
+}
+print('<pre>');
+var_dump($newids);
+print('</pre>');
+//       Mage::getResourceModel('catalog/product_type_configurable')->saveProducts($configurableProduct, array_keys($newids));
+
+?>
