@@ -1,5 +1,6 @@
 Automated Magento installer by command line
-bash /home/wwwdesen/public_html/teste/mageAutoInstaller/
+cd /home/wwwdesen/public_html/teste/mageAutoInstaller/
+bash mage-install.sh -h
 
 How to Install Magento Automaticaly
 http://www.magentogarden.com/blog/install-magento-automatically.html
