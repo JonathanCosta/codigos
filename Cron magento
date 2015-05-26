@@ -1,0 +1,1 @@
+wget -O /dev/null -q  URL_LOJA/cron.php > /dev/null
